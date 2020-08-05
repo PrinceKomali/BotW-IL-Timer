@@ -4,7 +4,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <input id="vidfile" type="file" /><br><br>
+<input id="vidfile" type="file" /><br><br>
 <b>Current Time: <span id="test">0.000</span></b><br><br>
 <button onclick="go(1)">Frame Advance</button>
 <button onclick="go(-1)">Frame Advance -1</button>
@@ -12,7 +12,7 @@
 <button onclick = "start()">Set Start</button>
 <button onclick="end()">Set End</button>
 <button onclick = "total()">Get Total</button><br>
-<button onclick="customgo()">Advance <input type="text" id = "tinput" "> frames</button>
+<p>Advance <input type="text" id = "tinput" size="1"/> frames <br><button onclick="customgo()">Advance Frames</button></p>
 <br><video id="vid" controls = "False" src="#" width=320 height=180></video><br>
 <b> Start Time: <span id="start">0.000</span> | End time: <span id="end">0.000</span> | Framecount: <span id="total">0.000</span></b><br>
 <button onclick="reset()">Restart Video</button><br>
@@ -69,7 +69,8 @@ vid.currentTime = vid.currentTime + (z/30)
 //setInterval(
 ; }
 function customgo(){
-
+var value = document.getElementById("tinput")
+go(value.value)
 }
 
 function start(){
@@ -89,5 +90,5 @@ document.getElementById("total").innerHTML = ((document.getElementById("end").in
 console.log(x);
 y.innerHTML = '<img src=' + x + '>';}
 */
-</script>
+  </script>
   </body>
