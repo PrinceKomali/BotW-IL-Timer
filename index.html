@@ -1,31 +1,35 @@
-<input id="vidfile" type="file" />
-<b id="test">0.000</b><br>
-<title> Breath of the Wild IL Timer</title>
-<link rel="shortcut icon" href="https://raw.githubusercontent.com/PrinceKomali/BotW-IL-Timer/master/favicon.ico" type="image/x-icon" />
-<button onclick="go(1)">Frame Advance</button><br>
-<button onclick="go(-1)">Frame Advance -1</button><br>
-<button onclick="go(15)">Forward 15f</button>
-<br><video id="vid" controls = "False" src="#" width=320 height=180></video><br>
-<button onclick="reset()">restart vid</button><br>
-<button id="start" onclick = "start()">Set Start</button><br>
-<button id="end" onclick="end()">Set End</button><br>
-<button id="total" onclick = "total()">Get Total</button>
-<script>
-var youtput;
-var vid = document.getElementById("vid");
-var x = document.getElementById("vidfile").files[0];
-var y = document.getElementById("test");
-window.addEventListener('load', function() {
-  vid.removeAttribute("controls")
-  document.querySelector('input[type="file"]').addEventListener('change', function() {
-    vid.removeAttribute("controls")
-      if (this.files && this.files[0]) {
+<head>
+  <title> Breath of the Wild IL Timer</title>
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/PrinceKomali/BotW-IL-Timer/master/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <input id="vidfile" type="file" />
+  <b id="test">0.000</b><br>
+  <button onclick="go(1)">Frame Advance</button><br>
+  <button onclick="go(-1)">Frame Advance -1</button><br>
+  <button onclick="go(15)">Forward 15f</button>
+  <br><video id="vid" controls = "False" src="#" width=320 height=180></video><br>
+  <button onclick="reset()">restart vid</button><br>
+  <button id="start" onclick = "start()">Set Start</button><br>
+  <button id="end" onclick="end()">Set End</button><br> 
+  <button id="total" onclick = "total()">Get Total</button>
+  <script>
+    var youtput;
+    var vid = document.getElementById("vid");
+    var x = document.getElementById("vidfile").files[0];
+    var y = document.getElementById("test");
+    window.addEventListener('load', function() {
+      vid.removeAttribute("controls")
+      document.querySelector('input[type="file"]').addEventListener('change', function() {
+        vid.removeAttribute("controls")
+        if (this.files && this.files[0]) {
           var img = document.querySelector('video');  // $('img')[0]
           img.src = URL.createObjectURL(this.files[0]); // set src to blob url
           img.onload = imageIsLoaded;
-      }
+       }
+    });
   });
-});
 
 var time;
 setInterval(y.innerHTML = vid.currentTime,1);
