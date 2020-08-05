@@ -1,47 +1,47 @@
 <head>
-  <title> Breath of the Wild IL Timer</title>
-  <link rel="shortcut icon" href="https://raw.githubusercontent.com/PrinceKomali/BotW-IL-Timer/master/favicon.ico" type="image/x-icon" />
-  <link rel="stylesheet" href="styles.css">
+    <title> Breath of the Wild IL Timer</title>
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/PrinceKomali/BotW-IL-Timer/master/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-<input id="vidfile" type="file" /><br><br>
-<b>Current Time: <span id="test">0.000</span></b><br><br>
-<button onclick="go(1)">Frame Advance</button>
-<button onclick="go(-1)">Frame Advance -1</button>
-<button onclick="go(15)">Forward 15f</button><br>
-<button onclick = "start()">Set Start</button>
-<button onclick="end()">Set End</button>
-<button onclick = "total()">Get Total</button><br>
-<p>Advance <input type="text" id = "tinput" size="1"/> frames <br><button onclick="customgo()">Advance Frames</button></p>
-<br><video id="vid" controls = "False" src="#" width=320 height=180></video><br>
-<b> Start Time: <span id="start">0.000</span> | End time: <span id="end">0.000</span> | Framecount: <span id="total">0.000</span></b><br>
-<button onclick="reset()">Restart Video</button><br>
-  <br><br><br>
-<h4>How To Use:</h4>
-<p>1) Import your video file at the top of the page.<br>
-2) Use the Frame Advance buttons to find the first fade-in frame Link is visible after the elevator cutscene<br>
-3) Click "Set Start"<br>
-4) Use the Frame Advance buttons again to find the first frame the A button lights up when clicking the "Examine" prompt<br>
-5) Click "Set End" and then click "Get Framecount"
-<br>Your framecount should be labled under the video</p>
-  <p style="font-size:10">Made by <a style="color:black" href="https://www.youtube.com/channel/UCoKZGYMKo_KTIXiWUYxVPKA"> Komali</a> on YouTube</p>
-<script>
 
+<body>
+    <input id="vidfile" type="file" /><br><br>
+    <b>Current Time: <span id="test">0.000</span></b><br><br>
+    <button onclick="go(1)">Frame Advance</button>
+    <button onclick="go(-1)">Frame Advance -1</button>
+    <button onclick="go(15)">Forward 15f</button><br>
+    <button onclick="start()">Set Start</button>
+    <button onclick="end()">Set End</button>
+    <button onclick="total()">Get Total</button><br>
+    <p>Advance <input type="text" id="tinput" size="1" /> frames <br><button onclick="customgo()">Advance Frames</button></p>
+    <br><video id="vid" controls="False" src="#" width=320 height=180></video><br>
+    <b> Start Time: <span id="start">0.000</span> | End time: <span id="end">0.000</span> | Framecount: <span id="total">0.000</span></b><br>
+    <button onclick="reset()">Restart Video</button><br>
+    <br><br><br>
+    <h4>How To Use:</h4>
+    <p>1) Import your video file at the top of the page.<br>
+        2) Use the Frame Advance buttons to find the first fade-in frame Link is visible after the elevator cutscene<br>
+        3) Click "Set Start"<br>
+        4) Use the Frame Advance buttons again to find the first frame the A button lights up when clicking the "Examine" prompt<br>
+        5) Click "Set End" and then click "Get Framecount"
+        <br>Your framecount should be labled under the video</p>
+    <p style="font-size:10">Made by <a style="color:black" href="https://www.youtube.com/channel/UCoKZGYMKo_KTIXiWUYxVPKA"> Komali</a> on YouTube</p>
+    <script>
 function setInputFilter(textbox, inputFilter) {
-  ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
-    textbox.addEventListener(event, function() {
-      if (inputFilter(this.value)) {
-        this.oldValue = this.value;
-        this.oldSelectionStart = this.selectionStart;
-        this.oldSelectionEnd = this.selectionEnd;
-      } else if (this.hasOwnProperty("oldValue")) {
-        this.value = this.oldValue;
-        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
-      } else {
-        this.value = "";
-      }
+    ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
+        textbox.addEventListener(event, function() {
+            if (inputFilter(this.value)) {
+                this.oldValue = this.value;
+                this.oldSelectionStart = this.selectionStart;
+                this.oldSelectionEnd = this.selectionEnd;
+            } else if (this.hasOwnProperty("oldValue")) {
+                this.value = this.oldValue;
+                this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+            } else {
+                this.value = "";
+            }
+        });
     });
-  });
 }
 
 var youtput;
@@ -49,46 +49,53 @@ var vid = document.getElementById("vid");
 var x = document.getElementById("vidfile").files[0];
 var y = document.getElementById("test");
 window.addEventListener('load', function() {
-  setInputFilter(document.getElementById("tinput"), function(value) {
-  return /^-?\d*$/.test(value); });
-  vid.removeAttribute("controls")
-  document.querySelector('input[type="file"]').addEventListener('change', function() {
+    setInputFilter(document.getElementById("tinput"), function(value) {
+        return /^-?\d*$/.test(value);
+    });
     vid.removeAttribute("controls")
-      if (this.files && this.files[0]) {
-          var img = document.querySelector('video');  // $('img')[0]
-          img.src = URL.createObjectURL(this.files[0]); // set src to blob url
-          img.onload = imageIsLoaded;
-      }
-  });
+    document.querySelector('input[type="file"]').addEventListener('change', function() {
+        vid.removeAttribute("controls")
+        if (this.files && this.files[0]) {
+            var img = document.querySelector('video'); // $('img')[0]
+            img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+            img.onload = imageIsLoaded;
+        }
+    });
 });
 
 var time;
-setInterval(y.innerHTML = vid.currentTime,1);
-function reset(){
-  vid.currentTime = "0.0";
-  youtput = 0.000;
-  y.innerHTML = youtput;
+setInterval(y.innerHTML = vid.currentTime, 1);
+
+function reset() {
+    vid.currentTime = "0.0";
+    youtput = 0.000;
+    y.innerHTML = youtput;
 }
 
-function go(z){
-  vid.pause();
-vid.currentTime = vid.currentTime + (z/30)
-  youtput = vid.currentTime.toFixed(3);
-  y.innerHTML = youtput;
-//setInterval(
-; }
-function customgo(){
-var value = document.getElementById("tinput")
-go(value.value)
+function go(z) {
+    vid.pause();
+    vid.currentTime = vid.currentTime + (z / 30)
+    youtput = vid.currentTime.toFixed(3);
+    y.innerHTML = youtput;
+    //setInterval(
+    ;
 }
 
-function start(){
-  document.getElementById("start").innerHTML = vid.currentTime.toFixed(3);}
-function end(){
-  document.getElementById("end").innerHTML = vid.currentTime.toFixed(3);
+function customgo() {
+    var value = document.getElementById("tinput")
+    go(value.value)
 }
-function total(){
-document.getElementById("total").innerHTML = ((document.getElementById("end").innerHTML*1)-(document.getElementById("start").innerHTML*1)+.03333333333).toFixed(3)
+
+function start() {
+    document.getElementById("start").innerHTML = vid.currentTime.toFixed(3);
+}
+
+function end() {
+    document.getElementById("end").innerHTML = vid.currentTime.toFixed(3);
+}
+
+function total() {
+    document.getElementById("total").innerHTML = ((document.getElementById("end").innerHTML * 1) - (document.getElementById("start").innerHTML * 1) + .03333333333).toFixed(3)
 }
 //alert(vid.currentTime);
 /*vid.addEventListener('canplay', function() {
@@ -99,5 +106,5 @@ document.getElementById("total").innerHTML = ((document.getElementById("end").in
 console.log(x);
 y.innerHTML = '<img src=' + x + '>';}
 */
-  </script>
-  </body>
+    </script>
+</body>
