@@ -1,0 +1,60 @@
+<input id="vidfile" type="file" />
+<b id="test">0.000</b><br>
+<button onclick="go(1)">Frame Advance</button><br>
+<button onclick="go(-1)">Frame Advance -1</button><br>
+<button onclick="go(15)">Forward 15f</button>
+<br><video id="vid" controls = "False" src="#" width=320 height=180></video><br>
+<button onclick="reset()">restart vid</button><br>
+<button id="start" onclick = "start()">Set Start</button><br>
+<button id="end" onclick="end()">Set End</button><br>
+<button id="total" onclick = "total()">Get Total</button>
+<script>
+var youtput;
+var vid = document.getElementById("vid");
+var x = document.getElementById("vidfile").files[0];
+var y = document.getElementById("test");
+window.addEventListener('load', function() {
+  vid.removeAttribute("controls")
+  document.querySelector('input[type="file"]').addEventListener('change', function() {
+    vid.removeAttribute("controls")
+      if (this.files && this.files[0]) {
+          var img = document.querySelector('video');  // $('img')[0]
+          img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+          img.onload = imageIsLoaded;
+      }
+  });
+});
+
+var time;
+setInterval(y.innerHTML = vid.currentTime,1);
+function reset(){
+  vid.currentTime = "0.0";
+  youtput = 0.000;
+  y.innerHTML = youtput;
+}
+
+function go(z){
+  vid.pause();
+vid.currentTime = vid.currentTime + (z/30)
+  youtput = vid.currentTime.toFixed(3);
+  y.innerHTML = youtput;
+//setInterval(
+; }
+function start(){
+  document.getElementById("start").innerHTML = vid.currentTime.toFixed(3);}
+function end(){
+  document.getElementById("end").innerHTML = vid.currentTime.toFixed(3);
+}
+function total(){
+document.getElementById("total").innerHTML = ((document.getElementById("end").innerHTML*1)-(document.getElementById("start").innerHTML*1)+.03333333333).toFixed(3)
+}
+//alert(vid.currentTime);
+/*vid.addEventListener('canplay', function() {
+    this.currentTime = 5;
+})*/
+
+/*function x(){
+console.log(x);
+y.innerHTML = '<img src=' + x + '>';}
+*/
+</script>
