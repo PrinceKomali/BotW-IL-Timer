@@ -4,32 +4,54 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <input id="vidfile" type="file" />
-  <b id="test">0.000</b><br>
-  <button onclick="go(1)">Frame Advance</button><br>
-  <button onclick="go(-1)">Frame Advance -1</button><br>
-  <button onclick="go(15)">Forward 15f</button>
-  <br><video id="vid" controls = "False" src="#" width=320 height=180></video><br>
-  <button onclick="reset()">restart vid</button><br>
-  <button id="start" onclick = "start()">Set Start</button><br>
-  <button id="end" onclick="end()">Set End</button><br> 
-  <button id="total" onclick = "total()">Get Total</button>
-  <script>
-    var youtput;
-    var vid = document.getElementById("vid");
-    var x = document.getElementById("vidfile").files[0];
-    var y = document.getElementById("test");
-    window.addEventListener('load', function() {
-      vid.removeAttribute("controls")
-      document.querySelector('input[type="file"]').addEventListener('change', function() {
-        vid.removeAttribute("controls")
-        if (this.files && this.files[0]) {
+  <input id="vidfile" type="file" /><br><br>
+<b>Current Time: <span id="test">0.000</span></b><br><br>
+<button onclick="go(1)">Frame Advance</button>
+<button onclick="go(-1)">Frame Advance -1</button>
+<button onclick="go(15)">Forward 15f</button><br>
+<button onclick = "start()">Set Start</button>
+<button onclick="end()">Set End</button>
+<button onclick = "total()">Get Total</button><br>
+<button onclick="customgo()">Advance <input type="text" id = "tinput" "> frames</button>
+<br><video id="vid" controls = "False" src="#" width=320 height=180></video><br>
+<b> Start Time: <span id="start">0.000</span> | End time: <span id="end">0.000</span> | Framecount: <span id="total">0.000</span></b><br>
+<button onclick="reset()">Restart Video</button><br>
+<script>
+
+function setInputFilter(textbox, inputFilter) {
+  ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
+    textbox.addEventListener(event, function() {
+      if (inputFilter(this.value)) {
+        this.oldValue = this.value;
+        this.oldSelectionStart = this.selectionStart;
+        this.oldSelectionEnd = this.selectionEnd;
+      } else if (this.hasOwnProperty("oldValue")) {
+        this.value = this.oldValue;
+        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+      } else {
+        this.value = "";
+      }
+    });
+  });
+}
+
+var youtput;
+var vid = document.getElementById("vid");
+var x = document.getElementById("vidfile").files[0];
+var y = document.getElementById("test");
+window.addEventListener('load', function() {
+  setInputFilter(document.getElementById("tinput"), function(value) {
+  return /^-?\d*$/.test(value); });
+  vid.removeAttribute("controls")
+  document.querySelector('input[type="file"]').addEventListener('change', function() {
+    vid.removeAttribute("controls")
+      if (this.files && this.files[0]) {
           var img = document.querySelector('video');  // $('img')[0]
           img.src = URL.createObjectURL(this.files[0]); // set src to blob url
           img.onload = imageIsLoaded;
-       }
-    });
+      }
   });
+});
 
 var time;
 setInterval(y.innerHTML = vid.currentTime,1);
@@ -46,6 +68,10 @@ vid.currentTime = vid.currentTime + (z/30)
   y.innerHTML = youtput;
 //setInterval(
 ; }
+function customgo(){
+
+}
+
 function start(){
   document.getElementById("start").innerHTML = vid.currentTime.toFixed(3);}
 function end(){
@@ -64,3 +90,4 @@ console.log(x);
 y.innerHTML = '<img src=' + x + '>';}
 */
 </script>
+  </body>
