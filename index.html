@@ -27,7 +27,7 @@
         <br>Your framecount should be labled under the video</p>
     <p style="font-size:10">Made by <a style="color:black" href="https://www.youtube.com/channel/UCoKZGYMKo_KTIXiWUYxVPKA"> Komali</a> on YouTube</p>
     <script>
-function setInputFilter(textbox, inputFilter) {
+        function setInputFilter(textbox, inputFilter) {
     ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
         textbox.addEventListener(event, function() {
             if (inputFilter(this.value)) {
@@ -64,6 +64,8 @@ window.addEventListener('load', function() {
 });
 
 var time;
+var st = 0;
+var nd = 0;
 setInterval(y.innerHTML = vid.currentTime, 1);
 
 function reset() {
@@ -87,24 +89,20 @@ function customgo() {
 }
 
 function start() {
+    st = vid.currentTime
     document.getElementById("start").innerHTML = vid.currentTime.toFixed(3);
 }
 
 function end() {
+    nd = vid.currentTime
     document.getElementById("end").innerHTML = vid.currentTime.toFixed(3);
 }
 
 function total() {
-    document.getElementById("total").innerHTML = ((document.getElementById("end").innerHTML * 1) - (document.getElementById("start").innerHTML * 1) + .03333333333).toFixed(3)
-}
-//alert(vid.currentTime);
-/*vid.addEventListener('canplay', function() {
-    this.currentTime = 5;
-})*/
 
-/*function x(){
-console.log(x);
-y.innerHTML = '<img src=' + x + '>';}
-*/
+    document.getElementById("total").innerHTML = (nd - st + (1 / 30)).toFixed(3)
+}
+
+
     </script>
 </body>
