@@ -2,7 +2,8 @@
     <meta name="description" content="A timing tool for Breath of the Wild Individual Level runs">
     <title> Breath of the Wild IL Timer</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="styles.css"><!--TODO: add css -->
+    <link rel="stylesheet" href="styles.css">
+    <!--TODO: add css -->
 </head>
 <!--
 
@@ -52,6 +53,7 @@
 
 
 -->
+
 <body>
     <input id="vidfile" type="file" /><br><br>
     <b>Current Time: <span id="test">0.000</span></b><br><br>
@@ -61,7 +63,7 @@
     <button onclick="start()">Set Start</button>
     <button onclick="end()">Set End</button>
     <button onclick="total()">Get Total</button><br>
-    <p>Advance <input type="text" id="tinput" size="1" /> frames <br><button onclick="customgo()">Advance Frames</button></p>
+    <p>Advance <input type="text" id="tinput" size="1" /> frames <button onclick="customgo()">Advance Frames</button></p>
     <p> You can enter negative frames to go backwards</p>
     <br><video id="vid" controls="False" src="#" width=320 height=180></video><br>
     <b> Start Time: <span id="start">0.000</span> | End time: <span id="end">0.000</span> | Framecount: <span id="total">0.000</span></b><br>
@@ -73,10 +75,10 @@
         3) Click "Set Start"<br>
         4) Use the Frame Advance buttons again to find the first frame the A button lights up when clicking the "Examine" prompt<br>
         5) Click "Set End" and then click "Get Framecount"
-        <br>Your framecount should be labled under the video</p>
-    <p style="font-size:10">Made by <a style="color:black" href="https://www.youtube.com/channel/UCoKZGYMKo_KTIXiWUYxVPKA"> Komali</a> on YouTube</p>
+        <br>Your framecount should be labled under the video</p><br><br>
+    <p style="font-size:10">Made by <a style="font-size:10" href="https://www.youtube.com/channel/UCoKZGYMKo_KTIXiWUYxVPKA"> Komali</a> on YouTube</p>
     <script>
-        function setInputFilter(textbox, inputFilter) {
+function setInputFilter(textbox, inputFilter) {
     ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
         textbox.addEventListener(event, function() {
             if (inputFilter(this.value)) {
@@ -151,7 +153,5 @@ function total() {
 
     document.getElementById("total").innerHTML = (nd - st + (1 / 30)).toFixed(3)
 }
-
-
     </script>
 </body>
