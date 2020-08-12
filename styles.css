@@ -27,7 +27,7 @@ h4 {
     ;
 }
 
-button {
+button, label {
     font-family: 'hyliaserif';
     background-color: #c9b783;
     border: none;
