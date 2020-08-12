@@ -1,1 +1,56 @@
+@font-face {
+    font-family: hyliaserif;
+    src: url(HyliaSerifBeta-Regular.otf);
+}
 
+body {
+    color: white;
+    background-image: url('background.png');
+}
+
+p,
+a,
+b,
+h4 {
+    font-family: 'hyliaserif';
+
+    color: white;
+
+
+    text-decoration: none;
+    //display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    ;
+}
+
+button {
+    font-family: 'hyliaserif';
+    background-color: #c9b783;
+    border: none;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+#vidfile {
+    font-family: 'hyliaserif';
+    background-color: #c9b783;
+    border: none;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10x;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+}
