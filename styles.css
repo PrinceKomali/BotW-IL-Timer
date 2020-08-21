@@ -5,6 +5,11 @@
    
 }
 
+.outline{
+  font-size: 20px;
+  text-shadow: -1px -1px 0 #1a7ce2, 1px -1px 0 #1a7ce2, -1px 1px 0 #1a7ce2, 1px 1px 0 #1a7ce2;
+}
+
 body {
     color: white;
     background-image: url('background.png');
