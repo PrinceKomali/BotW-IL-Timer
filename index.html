@@ -82,6 +82,14 @@
         <br>Your framecount should be labled under the video</p><br><br>
     <p style="font-size:10">Made by <a style="font-size:10" href="https://www.youtube.com/channel/UCoKZGYMKo_KTIXiWUYxVPKA"> Komali</a> on YouTube</p>
     <script>
+         document.body.onkeydown = function(e) {
+    if (e.keyCode == 39) {
+      go(1);
+    }
+    if (e.keyCode == 37) {
+      go(-1);
+    }
+  }
 function setInputFilter(textbox, inputFilter) {
     ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
         textbox.addEventListener(event, function() {
