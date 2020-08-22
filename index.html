@@ -60,22 +60,22 @@
   <input id="vidfile" type="file" style="visibility:hidden;"/>
 </div>
     <br><br>
-    <b>Current Time: <span id="test">0.000</span></b><br><br>
+    <b>Current Time: <span id="test">0:00.000</span></b><br><br>
     <button onclick="go(1)">Frame Advance</button>
     <button onclick="go(-1)">Frame Advance -1</button>
     <button onclick="go(15)">Forward 15f</button><br>
     <button onclick="start()">Set Start</button>
     <button onclick="end()">Set End</button>
-    <button onclick="total()">Get Total</button><br>
+    <button onclick="total()" class="outline2">Get Framecount</button><br>
     <p>Advance <input type="text" id="tinput" size="1" /> frames <button onclick="customgo()">Advance Frames</button></p>
     <p> You can enter negative frames to go backwards</p>
     <br><video id="vid" controls="False" src="#" width=320 height=180></video><br>
-     <p> Start Time: <span id="start">0.000</span> | End time: <span id="end">0.000</span> | <span class="outline">Framecount: <span id="total">0.000</span></span></p><br>
+     <p> Start Time: <span id="start">0:00.000</span> | End time: <span id="end">0:00.000</span> | <span class="outline">Framecount: <span id="total">0:00.000</span></span></p><br>
     <button onclick="reset()">Restart Video</button><br>
     <br><br><br>
     <h4>How To Use:</h4>
     <p>1) Import your video file at the top of the page.<br>
-        2) Use the Frame Advance buttons to find the first fade-in frame Link is visible after the elevator cutscene<br>
+        2) Use the Frame Advance buttons (or the arrow keys) to find the first fade-in frame Link is visible after the elevator cutscene<br>
         3) Click "Set Start"<br>
         4) Use the Frame Advance buttons again to find the first frame the A button lights up when clicking the "Examine" prompt<br>
         5) Click "Set End" and then click "Get Framecount"
@@ -129,21 +129,26 @@ window.addEventListener('load', function() {
 var time;
 var st = 0;
 var nd = 0;
-setInterval(y.innerHTML = vid.currentTime, 1);
+//setInterval(y.innerHTML = vid.currentTime, 1);
 
 function reset() {
     vid.currentTime = "0.0";
     youtput = 0.000;
-    y.innerHTML = youtput;
+    y.innerHTML = "0:00.000";
 }
 
 function go(z) {
     vid.pause();
     vid.currentTime = vid.currentTime + (z / 30)
-    youtput = vid.currentTime.toFixed(3);
-    y.innerHTML = youtput;
-    //setInterval(
-    ;
+    var time = vid.currentTime
+   var goM = Math.floor(time / 60)
+
+   if(time - (goM * 60) < 10){
+    y.innerHTML = goM + ":0" + (time-(60*goM)).toFixed(3)
+   }else{
+     y.innerHTML = goM + ":" + (time-(60*goM)).toFixed(3)
+   
+  }
 }
 
 function customgo() {
@@ -153,17 +158,41 @@ function customgo() {
 
 function start() {
     st = vid.currentTime
-    document.getElementById("start").innerHTML = vid.currentTime.toFixed(3);
+   var stM = Math.floor(st / 60);//vid.currentTime.toFixed(3);
+   if(nd-(stM * 60) < 10){
+     document.getElementById("start").innerHTML = stM + ":0" + (st-(60*stM)).toFixed(3)
+   }else{
+     document.getElementById("start").innerHTML = stM + ":" + (st-(60*stM)).toFixed(3)
+   }
 }
 
 function end() {
+
     nd = vid.currentTime
-    document.getElementById("end").innerHTML = vid.currentTime.toFixed(3);
+   // var dispEnd = nd;
+
+   var endM = Math.floor(nd / 60);//vid.currentTime.toFixed(3);
+  // if(endM > 1){
+
+   if(nd-(endM*60) < 10){
+     document.getElementById("end").innerHTML = endM + ":0" + (nd-(60*endM)).toFixed(3)
+   }else{
+     document.getElementById("end").innerHTML = endM + ":" + (nd-(60*endM)).toFixed(3)
+   }
+
+
 }
 
 function total() {
-
-    document.getElementById("total").innerHTML = (nd - st + (1 / 30)).toFixed(3)
-}
+    var fc = (nd - st + (1 / 30));
+    var m = Math.floor(fc / 60);//vid.currentTime.toFixed(3);
+    
+   if(fc-(m * 60) < 10){
+     document.getElementById("total").innerHTML = m + ":0" + (fc-(m * 60)).toFixed(3)
+   }else{
+     document.getElementById("total").innerHTML = m + ":" + (fc-(m * 60)).toFixed(3)
+   }
+    
+}//???
     </script>
 </body>
