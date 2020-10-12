@@ -1,9 +1,9 @@
+
 <head>
     <meta name="description" content="A timing tool for Breath of the Wild Individual Level runs">
     <title> Breath of the Wild IL Timer</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="styles.css">
-    <!--TODO: add css -->
 </head>
 <!--
 
@@ -61,14 +61,17 @@
 </div>
     <br><br>
     <b>Current Time: <span id="test">0:00.000</span></b><br><br>
+    <button onclick="go(150)">Forward 5s</button>
+    <button onclick="go(-150)">Backwards 5s</button><br>
     <button onclick="go(1)">Frame Advance</button>
     <button onclick="go(-1)">Frame Advance -1</button>
     <button onclick="go(15)">Forward 15f</button><br>
     <button onclick="start()">Set Start</button>
     <button onclick="end()">Set End</button>
     <button onclick="total()" class="outline2">Get Framecount</button><br>
-    <p>Advance <input type="text" id="tinput" size="1" /> frames <button onclick="customgo()">Advance Frames</button></p>
-    <p> You can enter negative frames to go backwards</p>
+    <p>Advance <input type="text" id="t3input" size="1" />m <input type="text" id="t2input" size="1" />s <input type="text" id="tinput" size="1" />f  <button onclick="customgo()">Advance</button></p>
+    <p> You can enter negative times to go backwards</p>
+    <p>Go to Timestamp <input type="text" id="ti3input" size="1" />m <input type="text" id="ti2input" size="1" />s <input type="text" id="tiinput" size="1" />f  <button onclick="timestamp()">Go!</button>
     <br><video id="vid" controls="False" src="#" width=640 height=360></video><br>
      <p> Start Time: <span id="start">0:00.000</span> | End time: <span id="end">0:00.000</span> | <span class="outline">Framecount: <span id="total">0:00.000</span></span></p><br>
     <button onclick="reset()">Restart Video</button><br>
@@ -150,10 +153,39 @@ function go(z) {
    
   }
 }
+function timestamp() {
+   var value = parseInt(document.getElementById("tiinput").value)
+    var value2 = parseInt(document.getElementById("ti2input").value)
+    var value3 = parseInt(document.getElementById("ti3input").value)
+    if(value == "") value = 0
+    if(value2 == "") value2 = 0
+    if(value3 == "") value3 = 0
+    
+    value = value + (value2 * 30) + (value3 * 30 * 60)
+      vid.pause();
+    vid.currentTime = (value / 30)
+    var time = vid.currentTime
+   var goM = Math.floor(time / 60)
+
+   if(time - (goM * 60) < 10){
+    y.innerHTML = goM + ":0" + (time-(60*goM)).toFixed(3)
+   }else{
+     y.innerHTML = goM + ":" + (time-(60*goM)).toFixed(3)
+   
+  }
+
+}
 
 function customgo() {
-    var value = document.getElementById("tinput")
-    go(value.value)
+    var value = parseInt(document.getElementById("tinput").value)
+    var value2 = parseInt(document.getElementById("t2input").value)
+    var value3 = parseInt(document.getElementById("t3input").value)
+    if(value == "") value = 0
+    if(value2 == "") value2 = 0
+    if(value3 == "") value3 = 0
+    value = value + (value2 * 30) + (value3 * 30 * 60)
+    
+    go(value)
 }
 
 function start() {
