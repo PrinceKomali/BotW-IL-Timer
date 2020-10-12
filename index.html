@@ -1,4 +1,5 @@
 
+
 <head>
     <meta name="description" content="A timing tool for Breath of the Wild Individual Level runs">
     <title> Breath of the Wild IL Timer</title>
@@ -157,9 +158,9 @@ function timestamp() {
    var value = parseInt(document.getElementById("tiinput").value)
     var value2 = parseInt(document.getElementById("ti2input").value)
     var value3 = parseInt(document.getElementById("ti3input").value)
-    if(value == "") value = 0
-    if(value2 == "") value2 = 0
-    if(value3 == "") value3 = 0
+    if(isNaN(value)) value = 0
+    if(isNaN(value2)) value2 = 0
+    if(isNaN(value3)) value3 = 0
     
     value = value + (value2 * 30) + (value3 * 30 * 60)
       vid.pause();
@@ -180,9 +181,9 @@ function customgo() {
     var value = parseInt(document.getElementById("tinput").value)
     var value2 = parseInt(document.getElementById("t2input").value)
     var value3 = parseInt(document.getElementById("t3input").value)
-    if(value == "") value = 0
-    if(value2 == "") value2 = 0
-    if(value3 == "") value3 = 0
+    if(isNaN(value)) value = 0
+    if(isNaN(value2)) value2 = 0
+    if(isNaN(value3)) value3 = 0
     value = value + (value2 * 30) + (value3 * 30 * 60)
     
     go(value)
