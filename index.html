@@ -60,6 +60,7 @@
  <div id="inputcontainer">
   <input id="vidfile" type="file" style="visibility:hidden;"/>
 </div>
+<input type = "text" id = "url"><button onclick = "load()">Open from Youtube</button>
     <br><br>
     <b>Current Time: <span id="test">0:00.000</span></b><br><br>
     <button onclick="go(150)">Forward 5s</button>
@@ -86,6 +87,34 @@
         <br>Your framecount should be labled under the video</p><br><br>
     <p style="font-size:10">Made by <a style="font-size:10" href="https://www.youtube.com/channel/UCoKZGYMKo_KTIXiWUYxVPKA"> Komali</a> on YouTube</p>
     <script>
+      
+function load() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      //document.getElementById("url").innerHTML =
+      //this.responseText;
+      var vid = document.getElementById("vid")
+      
+      vid.src = this.responseText
+
+
+    }
+  };
+  var vurl = document.getElementById("url");
+  console.log(vurl.value)
+  console.log("https://expressytdl.komali09.repl.co/dl?" + vurl.value)
+  xhttp.open("GET", "https://expressytdl.komali09.repl.co/dl?url=" + vurl.value, true);
+  xhttp.send();
+}
+
+
+
+
+
+
+
+
          document.body.onkeydown = function(e) {
     if (e.keyCode == 39) {
       go(1);
