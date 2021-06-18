@@ -13,6 +13,15 @@
             top: 80%;
             text-shadow: -1px -1px 0 #1a7ce2, 1px -1px 0 #1a7ce2, -1px 1px 0 #1a7ce2, 1px 1px 0 #1a7ce2;
         }
+        a {
+            color: white;
+        }
+        .v1 {
+            position: fixed;
+            bottom: 10;
+            right: 10;
+            text-align: right;
+        }
         .play {
             position: fixed;
             top: 200px;
