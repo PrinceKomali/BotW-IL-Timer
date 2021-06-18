@@ -61,6 +61,14 @@
 <p class = "yt button" onclick = "load()">Open from Youtube</p><input type = "text" id = "url" placeholder="">
 <video src="" oncontextmenu="return false;"></video>
 <script>
+    Object.defineProperty(HTMLMediaElement.prototype, 'playing', {
+        get: function(){
+            return !!(this.currentTime > 0 && !this.paused && !this.ended && this.readyState > 2);
+        }
+    })
+    //shamelessly stolen from stackoverflow :) 
+
+
     let nd = 0;
     let st = 0;
 
@@ -140,7 +148,44 @@
     
 
 
-
+    document.body.onkeydown = function(e) {
+    if (e.keyCode == 39 && !e.shiftKey && !e.ctrlKey) {
+      advance(1);
+    }
+    if (e.keyCode == 39 && e.shiftKey && !e.ctrlKey) {
+      advance(15);
+    }
+    if (e.keyCode == 39 && e.ctrlKey) {
+      advance(150);
+    }
+    if (e.keyCode == 37 && !e.shiftKey && !e.ctrlKey) {
+      advance(-1);
+    }
+    if (e.keyCode == 37 && e.shiftKey && !e.ctrlKey) {
+      advance(-15);
+    }
+    if (e.keyCode == 37 && e.ctrlKey) {
+      advance(-150);
+    }
+    if (e.keyCode == 13){
+        setSt();
+    }
+    if(e.keyCode == 8) {
+        setNd();
+    }
+    if(e.keyCode == 8) {
+        setNd();
+    }
+    if(e.keyCode == 32) {
+        if(vid.playing) {
+            vid.pause();
+        }
+        else {
+            vid.play();
+        }
+    }
+    
+  }
 
     let segmentDur;
     let main = setInterval(() => {
