@@ -137,13 +137,13 @@
     function setSt()
     {
         if(!isLoaded) return;
-        st = Math.floor(vid.currentTime * 30) / 30;
-        if(nd == 0) nd = Math.floor(vid.currentTime * 30) / 30;
+        st = vid.currentTime;
+        if(nd == 0) nd = vid.currentTime;
     }
     function setNd()
     {
         if(!isLoaded) return;
-        nd = Math.floor(vid.currentTime * 30) / 30;
+        nd = vid.currentTime;
     }
     
 
