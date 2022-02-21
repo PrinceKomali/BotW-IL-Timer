@@ -72,9 +72,9 @@
     let nd = 0;
     let st = 0;
     window.onload=_=>{
-        if (window.confirm('Try out the new IL Timer - It\'s better!') && !document.cookie.includes("check=true")) 
+        if (!document.cookie.includes("check=true")) 
         {
-            window.location.href='https://komali.dev/BotW-IL-Timer';
+            if(window.confirm('Try out the new IL Timer - It\'s better!')) window.location.href='https://komali.dev/BotW-IL-Timer';
         };
         document.cookie = "check=true";
     }
